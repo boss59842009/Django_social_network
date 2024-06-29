@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Вхід{% endblock %}
 {% block content %}
-<h1>ВХІД</h1>
-<form action="." method="POST">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" value="Вхід"></p>
-</form>
+<div class="col-8 text-center text-dark fw-bold fs-4">
+    <h1>ВХІД</h1>
+    <form action="." method="POST">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" class="btn btn-dark" value="Вхід"></p>
+    </form>
+</div>
 {% endblock %}

@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Django_social_network.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_system/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_system/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/auth_system/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/auth_system/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add models User, Profile and login, logout views">
+      <change afterPath="$PROJECT_DIR$/templates/auth_system/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/auth_system/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_system/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_system/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,13 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Runserver.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Runserver.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/auth_system&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/auth_system" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Runserver" type="PythonConfigurationType" factoryName="Python">
       <module name="Django_social_network" />
@@ -94,6 +102,30 @@
       <option name="presentableId" value="Default" />
       <updated>1718482092907</updated>
     </task>
+    <task id="LOCAL-00001" summary="add models User, Profile and login, logout views">
+      <option name="closed" value="true" />
+      <created>1718912231692</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718912231692</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add models User, Profile and login, logout views" />
+    <option name="LAST_COMMIT_MESSAGE" value="add models User, Profile and login, logout views" />
   </component>
 </project>
