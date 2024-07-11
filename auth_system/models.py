@@ -10,8 +10,8 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     GENDER_CHOICE = (
         ('-', '-'),
-        ('male', 'male'),
-        ('female', 'female')
+        ('male', 'чоловік'),
+        ('female', 'жінка')
     )
     bio = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True)

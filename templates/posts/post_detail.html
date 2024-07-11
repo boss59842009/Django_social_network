@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Деталі посту{% endblock %}
+{% block content %}
+<h2>{{ post.text }}</h2>
+{% if post.image %}
+    <img src="{{ post.image.url }}" class="card-img-bottom img-fluid"
+         style="object-fit: cover; height: auto; width: 40%" alt="Зображення публікації">
+{% else %}
+    <img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
+         style="object-fit: cover; height: auto; width: 40%" alt="Зображення публікації">
+{% endif %}
+<div class="container-fluid mt-3 px-0">
+    <div class="d-flex" text-start">
+        <button type="button" class="btn btn-outline-warning m-2">Редагувати</button>
+        <button type="button" class="btn btn-outline-danger m-2">Видалити</button>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="badge bg-success my-0">Подобається: {{ likes }}</p>
+            <p class="badge bg-dark my-0">Переглядів: {{ post.views }}</p>
+        </div>
+        <div class="col text-end">
+             <p class="badge bg-secondary my-0">Оновлено: {{ post.updated_at|date:"d.m.Y" }}
+      {{ post.updated_at|time:"H:i" }}</p>
+            <p class="badge bg-info text-dark my-0">{{ post.user.first_name }} {{ post.user.last_name }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
