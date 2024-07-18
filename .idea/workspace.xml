@@ -4,23 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add models User, Profile and login, logout views">
-      <change afterPath="$PROJECT_DIR$/posts/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts/mixins.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/posts/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/posts/post_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/posts/post_form.html" afterDir="false" />
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add app posts, model Post and views for allposts, postdetail, postcreate and templates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/posts/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/post_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;boss59842009&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/boss59842009/Django_social_network.git&quot;,
+    &quot;accountId&quot;: &quot;963b99ed-bdb5-4c75-8e68-554ab338e98e&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -54,7 +54,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/posts&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.externalResources&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -89,7 +89,7 @@
         </ENTRIES>
       </EXTENSION>
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
-      <option name="PARAMETERS" value="runserver 127.0.0.1:5000" />
+      <option name="PARAMETERS" value="runserver 127.0.0.1:4000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -101,7 +101,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
+        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
       </set>
     </attachedChunks>
   </component>
@@ -130,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719659962289</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add app posts, model Post and views for allposts, postdetail, postcreate and templates">
+      <option name="closed" value="true" />
+      <created>1720733665026</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720733665026</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +154,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add models User, Profile and login, logout views" />
-    <option name="LAST_COMMIT_MESSAGE" value="add models User, Profile and login, logout views" />
+    <MESSAGE value="add app posts, model Post and views for allposts, postdetail, postcreate and templates" />
+    <option name="LAST_COMMIT_MESSAGE" value="add app posts, model Post and views for allposts, postdetail, postcreate and templates" />
   </component>
 </project>
