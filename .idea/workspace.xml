@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add app posts, model Post and views for allposts, postdetail, postcreate and templates">
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add like_counts_view, edit PostDetailView and post_detail.">
+      <change afterPath="$PROJECT_DIR$/templates/posts/post_edit_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/mixins.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/posts/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/post_detail.html" afterDir="false" />
     </list>
@@ -18,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -138,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720733665026</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add like_counts_view, edit PostDetailView and post_detail.">
+      <option name="closed" value="true" />
+      <created>1721306135778</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721306135778</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,6 +165,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add models User, Profile and login, logout views" />
     <MESSAGE value="add app posts, model Post and views for allposts, postdetail, postcreate and templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="add app posts, model Post and views for allposts, postdetail, postcreate and templates" />
+    <MESSAGE value="add like_counts_view, edit PostDetailView and post_detail." />
+    <option name="LAST_COMMIT_MESSAGE" value="add like_counts_view, edit PostDetailView and post_detail." />
   </component>
 </project>
