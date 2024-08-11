@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Всі пости{% endblock %}
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for post in posts %}
+  <div class="col">
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">{{ post.user.first_name }} {{ post.user.last_name }}</h5>
+              <p class="text-muted">{{ post.updated_at|date:"d.m.Y" }}
+                  {{ post.updated_at|time:"H:i" }}</p>
+              <p class="card-text">{{ post.text }}</p>
+          </div>
+          {% if post.image %}
+            <a href="{% url 'post-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-bottom img-fluid"
+                 style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
+          {% else %}
+            <a href="{% url 'post-detail' post.pk %}"><img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
+                 style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
+          {% endif %}
+          <div class="card-footer text-center">
+              <p class="badge bg-success">Вподобайки: {{ post.total_likes }}</p>
+              <p class="badge bg-dark">Перегляди: {{ post.views }}</p>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

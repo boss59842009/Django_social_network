@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add PostUpdateView, post_edit_form.html">
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add forms and templates for edit and create posts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -152,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721311602713</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add forms and templates for edit and create posts">
+      <option name="closed" value="true" />
+      <created>1722785059269</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722785059269</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +179,7 @@
     <MESSAGE value="add app posts, model Post and views for allposts, postdetail, postcreate and templates" />
     <MESSAGE value="add like_counts_view, edit PostDetailView and post_detail." />
     <MESSAGE value="add PostUpdateView, post_edit_form.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="add PostUpdateView, post_edit_form.html" />
+    <MESSAGE value="add forms and templates for edit and create posts" />
+    <option name="LAST_COMMIT_MESSAGE" value="add forms and templates for edit and create posts" />
   </component>
 </project>
