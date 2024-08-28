@@ -4,7 +4,7 @@
 {% block content %}
 <h2>{{ post.user.first_name }} {{ post.user.last_name }}</h2>
 <p class="text-muted my-0">{{ post.updated_at|date:"d.m.Y" }} {{ post.updated_at|time:"H:i" }}</p>
-<p class="badge bg-success my-0">Вподобайки: {{ likes_count }}</p>
+<!--<p class="badge bg-success my-0">Вподобайки: {{ likes_count }}</p>-->
 <p class="badge bg-dark my-0">Переглядів: {{ post.views }}</p>
 <p class="fs-4">{{ post.text }}</p>
 {% if post.image %}
@@ -16,18 +16,16 @@
 {% endif %}
 <div class="container-fluid mt-3 px-0">
     <div class="d-flex text-start">
-        <form action="{% url 'like-post' post.pk %}" method="POST">
-            {% csrf_token %}
-            {% if is_liked %}
-                <button type="submit" class="btn btn-success btn-sm m-2">Подобається</button>
-            {% else %}
-                <button type="submit" class="btn btn-outline-success btn-sm m-2">Подобається</button>
-            {% endif %}
-        </form>
+        {% if is_liked %}
+            <p class="py-2"><a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{ likes_count }}</p>
+        {% else %}
+            <p class="py-2"><a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ likes_count }}</p>
+        {% endif %}
         {% if is_author %}
-        <a href="{% url 'edit-post' post.pk %}"><button type="button" class="btn btn-warning m-2 btn-sm">Редагувати
-        </button></a>
-            <button type="button" class="btn btn-danger m-2 btn-sm">Видалити</button>
+            <p><a href="{% url 'edit-post' post.pk %}"><button type="button"
+                                                              class="btn btn-warning m-2 btn-sm">Редагувати
+            </button></a></p>
+            <p><button type="button" class="btn btn-danger m-2 btn-sm">Видалити</button></p>
         {% endif %}
     </div>
 </div>

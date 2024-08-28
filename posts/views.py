@@ -45,7 +45,6 @@ class PostDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = models.Post
     template_name = 'posts/post_form.html'
@@ -58,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 def like_unlike_view(request, pk):
-    if request.method == 'POST':
+    if request.method == 'GET':
         post = models.Post.objects.get(id=pk)
         user = User.objects.get(username=request.user)
         if post.user_is_liked(request.user):
