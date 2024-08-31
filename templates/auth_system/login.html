@@ -1,10 +1,48 @@
-{% extends 'base.html' %}
-{% block title %}Вхід{% endblock %}
-{% block content %}
-<h1>ВХІД</h1>
-<form action="." method="POST">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" class="btn btn-dark" value="Вхід"></p>
-</form>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            background-image: url("{% static 'img/bg_login.jpg' %}")
+        }
+        .login_form {
+            width: 100%;
+            max-width: 25%;
+            background-color: rgba(89, 135, 219, 0.5);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5)
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form class="login_form" action="." method="POST">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-bold text-center"><i class="fa-solid fa-users me-2"></i>Вхід</h1>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name}}"
+                     placeholder="name@example.com" required>
+              <label for="{{ form.username.id_for_label }}">Username</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="{{ form.password.id_for_label }}"
+                     name="{{ form.password.html_name}}" placeholder="Password" required>
+              <label for="{{ form.password.id_for_label }}">Password</label>
+            </div>
+            <div class="d-flex justify-content-between my-3">
+
+              <label class="form-check-label" for="flexCheckDefault"><input class="form-check-input me-2"
+                                                                            type="checkbox" value="remember-me" id="flexCheckDefault">Запамʼятати мене</label>
+                <a class="text-decoration-none text-dark" href="{% url 'registration' %}">Реєстрація</a>
+            </div>
+            <button class="btn btn-dark w-100 py-2" type="submit">Увійти</button>
+        </form>
+    </div>
+</body>
+</html>

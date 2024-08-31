@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Створення посту{% endblock %}
 {% block content %}
+<h1>Стоврення посту</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
