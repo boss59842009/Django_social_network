@@ -54,9 +54,12 @@ class UserRegistrationView(CreateView):
         user = form.save()
         user.set_password(form.cleaned_data['password'])
         user.save()
-        profile = models.UserProfile.objects.create(user=user)
+        models.UserProfile.objects.create(user=user)
         # login(self.request, user)
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return HttpResponse("Not valid")
 
 
 @login_required

@@ -4,7 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     first_login = models.DateTimeField(null=True)
-    phone_number = models.CharField(max_length=14)
+    phone_number = models.CharField(max_length=18)
 
 
 class UserProfile(models.Model):
