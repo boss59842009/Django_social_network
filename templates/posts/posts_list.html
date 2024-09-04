@@ -2,29 +2,40 @@
 {% load static %}
 {% block title %}Всі пости{% endblock %}
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for post in posts %}
-  <div class="col">
-      <div class="card">
-          <div class="card-body">
-              <h5 class="card-title">{{ post.user.first_name }} {{ post.user.last_name }}</h5>
-              <p class="text-muted">{{ post.updated_at|date:"d.m.Y" }}
-                  {{ post.updated_at|time:"H:i" }}</p>
-              <p class="card-text">{{ post.text }}</p>
-          </div>
-          {% if post.image %}
-            <a href="{% url 'post-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-bottom img-fluid"
-                 style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
-          {% else %}
-            <a href="{% url 'post-detail' post.pk %}"><img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
-                 style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
-          {% endif %}
-          <div class="card-footer text-center">
-              <p class="badge bg-success">Вподобайки: {{ post.total_likes }}</p>
-              <p class="badge bg-dark">Перегляди: {{ post.views }}</p>
-          </div>
-      </div>
-  </div>
-  {% endfor %}
+{% for post in posts %}
+<div class="card mb-2 p-2">
+  <textarea class="form-control" id="create_post" rows="3" placeholder="Введіть текст для створення посту"></textarea>
 </div>
+<div class="card mb-2 p-2">
+    <div class="card-body p-0">
+        <h5 class="card-title mb-1">
+        {% if post.user.userprofile.avatar %}
+        <img src="{{ post.user.userprofile.avatar.url }}" alt="Фото профілю" width="32" height="32"
+             class="rounded-circle">
+        {% else %}
+        <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32" height="32"
+             class="rounded-circle">
+        {% endif %}
+        {{ post.user.first_name }} {{ post.user.last_name }}</h5>
+        <p class="card-text mb-1"><small class="text-muted">{{ post.updated_at|date:"d.m.Y" }}</small></p>
+        <h6 class="card-text mb-2">{{ post.text }}</h6>
+    </div>
+    {% if post.image %}
+    <a href="{% url 'post-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-bottom img-fluid"
+         style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
+    {% else %}
+    <a href="{% url 'post-detail' post.pk %}"><img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
+         style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
+    {% endif %}
+    <div class="card-footer text-start p-0">
+        {% if is_liked %}
+            <p class="m-0"><a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{
+                post.total_likes }}</p>
+        {% else %}
+            <p class="m-0"><a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ post.total_likes }}</p>
+        {% endif %}
+        <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}

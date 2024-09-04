@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="add comment model, and modify post_detail.html">
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723380609136</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
+      <option name="closed" value="true" />
+      <created>1725195905866</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1725195905866</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,6 +196,7 @@
     <MESSAGE value="add PostUpdateView, post_edit_form.html" />
     <MESSAGE value="add forms and templates for edit and create posts" />
     <MESSAGE value="add comment model, and modify post_detail.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="add comment model, and modify post_detail.html" />
+    <MESSAGE value="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView" />
   </component>
 </project>
