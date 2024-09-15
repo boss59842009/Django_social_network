@@ -2,10 +2,41 @@
 {% load static %}
 {% block title %}Всі пости{% endblock %}
 {% block content %}
-{% for post in posts %}
 <div class="card mb-2 p-2">
-  <textarea class="form-control" id="create_post" rows="3" placeholder="Введіть текст для створення посту"></textarea>
+  <input type="text" id="create_post" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Введіть текст для створення посту">
 </div>
+<div class="modal" id="new_post" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Створити пост</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h5>{% if request.user.userprofile.avatar %}
+            <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
+                    class="rounded-circle">
+          {% else %}
+            <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
+                    class="rounded-circle">
+          {% endif %}
+          {{ request.user.first_name }} {{ request.user.last_name }}</h5>
+          <form method="POST" action="{% url 'post-create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Текст публікації" name="{{ create_post_form.text.html_name }}" id="{{ create_post_form.text.id_for_label }}" style="height: 100px"></textarea>
+              <label for="{{ create_post_form.text.id_for_label }}">Текст публікації</label>
+            </div>
+            <div class="my-3">
+              <input class="form-control" name="{{ create_post_form.image.html_name }}" type="file" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-success">Опублікувати</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% for post in posts %}
 <div class="card mb-2 p-2">
     <div class="card-body p-0">
         <h5 class="card-title mb-1">
@@ -38,4 +69,7 @@
     </div>
 </div>
 {% endfor %}
+<script src="{% static 'js/create_post_modal.js' %}"></script>
 {% endblock %}
+
+

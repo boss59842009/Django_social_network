@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Створення посту{% endblock %}
+{% block title %}Редагування посту{% endblock %}
 {% block content %}
-<h1>Стоврення посту</h1>
+<h1>Редагування посту</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

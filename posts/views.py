@@ -17,9 +17,14 @@ class AllPostsView(LoginRequiredMixin, ListView):
     template_name = 'posts/posts_list.html'
     context_object_name = 'posts'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['create_post_form'] = forms.PostForm()
+        return context
+
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.annotate(total_likes=Count('likes')).order_by('updated_at')
+        queryset = queryset.annotate(total_likes=Count('likes')).order_by('-updated_at')
         return queryset
 
 
