@@ -21,7 +21,7 @@
                     class="rounded-circle">
           {% endif %}
           {{ request.user.first_name }} {{ request.user.last_name }}</h5>
-          <form method="POST" action="{% url 'post-create' %}" enctype="multipart/form-data">
+          <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-floating">
               <textarea class="form-control" placeholder="Текст публікації" name="{{ create_post_form.text.html_name }}" id="{{ create_post_form.text.id_for_label }}" style="height: 100px"></textarea>
@@ -58,12 +58,19 @@
     <a href="{% url 'post-detail' post.pk %}"><img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
          style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
     {% endif %}
-    <div class="card-footer text-start p-0">
-        {% if is_liked %}
-            <p class="m-0"><a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{
-                post.total_likes }}</p>
+    <div class="d-flex justify-content-start py-1">
+        {% if post.is_liked %}
+            <p class="m-0 pe-2">
+                <a href="{% url 'like-post' post.pk %}">
+                    <i class="fa-solid fa-heart"></i>
+                </a> {{ post.total_likes }}
+            </p>
         {% else %}
-            <p class="m-0"><a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ post.total_likes }}</p>
+            <p class="m-0">
+                <a href="{% url 'like-post' post.pk %}">
+                    <i class="fa-regular fa-heart"></i>
+                </a> {{ post.total_likes }}
+            </p>
         {% endif %}
         <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>
     </div>

@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
-      <change afterPath="$PROJECT_DIR$/static/js/create_post_modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024,_00_15_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024__00_15__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/posts/post_edit_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/post_edit_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/posts/posts_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/posts_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +103,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
+        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
       </set>
     </attachedChunks>
   </component>

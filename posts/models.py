@@ -18,10 +18,16 @@ class Post(models.Model):
         return self.likes.count()
 
     def user_is_liked(self, user):
-        return str(user) in [like.username for like in self.likes.all()]
+        return self.likes.filter(username=user)
 
     class Meta:
         ordering = ['-updated_at']
+
+
+class PostView(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):

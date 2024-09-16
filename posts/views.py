@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -12,20 +12,30 @@ from auth_system.models import User
 from posts.mixins import UserIsAuthorMixin
 
 
-class AllPostsView(LoginRequiredMixin, ListView):
-    model = models.Post
-    template_name = 'posts/posts_list.html'
-    context_object_name = 'posts'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['create_post_form'] = forms.PostForm()
-        return context
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.annotate(total_likes=Count('likes')).order_by('-updated_at')
-        return queryset
+@login_required
+def all_posts_view(request):
+    if request.method == 'GET':
+        posts = models.Post.objects.all().annotate(total_likes=Count('likes'), is_liked=Count('likes',
+                                                                                              filter=Q(
+                                                                                                  likes__id=request.user.pk)))
+        create_post_form = forms.PostForm()
+        context = {
+            'posts': posts,
+            'create_post_form': create_post_form,
+        }
+        return render(request, 'posts/posts_list.html', context)
+    else:
+        create_post_form = forms.PostForm(request.POST)
+        if create_post_form.is_valid():
+            data = create_post_form.cleaned_data
+            models.Post.objects.create(
+                text=data['text'],
+                image=data['image'],
+                user=request.user
+            )
+            return redirect('all-posts')
+        else:
+            return HttpResponse('Not valid')
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
@@ -39,28 +49,20 @@ class PostDetailView(LoginRequiredMixin, DetailView):
             context.update({'is_liked': True})
         else:
             context.update({'is_liked': False})
+        if not models.PostView.objects.filter(post=self.object, user=self.request.user).exists():
+            models.PostView.objects.create(post=self.object, user=self.request.user)
             self.object.views += 1
             self.object.save()
+
         likes = self.object.total_likes()
         context.update({'likes_count': likes})
         context.update({'is_author': self.object.user == self.request.user})
         comments = self.object.comments.all()
         context.update({'comments': comments})
-        print(context)
         return context
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = models.Post
-    template_name = 'posts/post_form.html'
-    form_class = forms.PostForm
-    success_url = reverse_lazy('all-posts')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-
+@login_required
 def like_unlike_view(request, pk):
     if request.method == 'GET':
         post = models.Post.objects.get(id=pk)
