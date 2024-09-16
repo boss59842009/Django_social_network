@@ -61,16 +61,9 @@
     <div class="d-flex justify-content-start py-1">
         {% if post.is_liked %}
             <p class="m-0 pe-2">
-                <a href="{% url 'like-post' post.pk %}">
-                    <i class="fa-solid fa-heart"></i>
-                </a> {{ post.total_likes }}
-            </p>
+                <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{ post.total_likes }}</p>
         {% else %}
-            <p class="m-0">
-                <a href="{% url 'like-post' post.pk %}">
-                    <i class="fa-regular fa-heart"></i>
-                </a> {{ post.total_likes }}
-            </p>
+            <p class="m-0 pe-2"><a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ post.total_likes }}</p>
         {% endif %}
         <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>
     </div>
