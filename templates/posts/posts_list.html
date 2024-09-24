@@ -28,7 +28,8 @@
               <label for="{{ create_post_form.text.id_for_label }}">Текст публікації</label>
             </div>
             <div class="my-3">
-              <input class="form-control" name="{{ create_post_form.image.html_name }}" type="file" accept="image/*">
+              <input class="form-control" type="file" name="{{ create_post_form.image.html_name }}"
+                     id="{{ create_post_form.image.id_for_label }}">
             </div>
             <button type="submit" class="btn btn-success">Опублікувати</button>
           </form>

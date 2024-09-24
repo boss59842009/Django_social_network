@@ -25,7 +25,8 @@
             <p><a href="{% url 'edit-post' post.pk %}"><button type="button"
                                                               class="btn btn-warning m-2 btn-sm">Редагувати
             </button></a></p>
-            <p><button type="button" class="btn btn-danger m-2 btn-sm">Видалити</button></p>
+            <p><a href="{% url 'delete-post' post.pk %}"><button type="button" class="btn btn-danger m-2 btn-sm">
+                Видалити</button></a></p>
         {% endif %}
     </div>
 </div>

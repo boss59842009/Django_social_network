@@ -26,9 +26,10 @@ def all_posts_view(request):
         }
         return render(request, 'posts/posts_list.html', context)
     else:
-        create_post_form = forms.PostForm(request.POST)
+        create_post_form = forms.PostForm(request.POST, request.FILES)
         if create_post_form.is_valid():
             data = create_post_form.cleaned_data
+            print(data)
             models.Post.objects.create(
                 text=data['text'],
                 image=data['image'],
@@ -37,6 +38,19 @@ def all_posts_view(request):
             return redirect('all-posts')
         else:
             return HttpResponse('Not valid')
+
+
+@login_required
+def delete_post(request, pk):
+    post = models.Post.objects.get(id=pk)
+    if request.user.username != post.user.username:
+        return redirect('post-detail', pk=pk)
+
+    if request.method == 'POST':
+        post.delete()
+        return redirect('all-posts')
+
+    return render(request, 'posts/post_confirm_delete.html', {'post': post})
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
