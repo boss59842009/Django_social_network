@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Видалити</button>
-        <a href="{% url 'all-posts' %}" class="btn btn-secondary">Відміна</a>
+        <a href="{% url 'post-detail' post.pk %}" class="btn btn-secondary">Відміна</a>
     </form>
 </div>
 {% endblock %}

@@ -8,3 +8,9 @@ class PostForm(forms.ModelForm):
         fields = ['text', 'image']
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ['text', 'image']
+
+

@@ -29,7 +29,6 @@ def all_posts_view(request):
         create_post_form = forms.PostForm(request.POST, request.FILES)
         if create_post_form.is_valid():
             data = create_post_form.cleaned_data
-            print(data)
             models.Post.objects.create(
                 text=data['text'],
                 image=data['image'],
@@ -53,28 +52,39 @@ def delete_post(request, pk):
     return render(request, 'posts/post_confirm_delete.html', {'post': post})
 
 
-class PostDetailView(LoginRequiredMixin, DetailView):
-    model = models.Post
-    template_name = 'posts/post_detail.html'
-    context_object_name = 'post'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.object.user_is_liked(self.request.user):
+def post_detail_view(request, pk):
+    if request.method == 'GET':
+        post = models.Post.objects.get(id=pk)
+        context = {'post': post}
+        if post.user_is_liked(request.user):
             context.update({'is_liked': True})
         else:
             context.update({'is_liked': False})
-        if not models.PostView.objects.filter(post=self.object, user=self.request.user).exists():
-            models.PostView.objects.create(post=self.object, user=self.request.user)
-            self.object.views += 1
-            self.object.save()
+        if not models.PostView.objects.filter(post=post, user=request.user).exists():
+            models.PostView.objects.create(post=post, user=request.user)
+            post.views += 1
+            post.save()
 
-        likes = self.object.total_likes()
+        likes = post.total_likes()
         context.update({'likes_count': likes})
-        context.update({'is_author': self.object.user == self.request.user})
-        comments = self.object.comments.all()
+        context.update({'is_author': post.user == request.user})
+
+        create_comment_form = forms.CommentForm()
+        context.update({'create_comment_form': create_comment_form})
+        comments = post.comments.all()
         context.update({'comments': comments})
-        return context
+        return render(request, template_name='posts/post_detail.html', context=context)
+    else:
+        created_post = forms.CommentForm(request.POST, request.FILES)
+        if created_post.is_valid():
+            data = created_post.cleaned_data
+            models.Comment.objects.create(
+                text=data['text'],
+                image=data['image'],
+                post=models.Post.objects.get(id=pk),
+                author=request.user
+            )
+            return redirect('post-detail', pk=pk)
 
 
 @login_required
