@@ -30,8 +30,8 @@
             {% endif %}
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="{% url 'edit' %}">{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
-            <li><a class="dropdown-item" href="#">Налаштування</a></li>
+            <li><a class="dropdown-item" href="{% url 'info-profile' request.user.id %}">{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+            <li><a class="dropdown-item" href="{% url 'edit' %}">Налаштування</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form id="logout" class="d-flex" action='{% url "logout" %}' method="post">

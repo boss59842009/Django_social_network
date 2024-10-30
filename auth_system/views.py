@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -63,7 +63,7 @@ class UserRegistrationView(CreateView):
 
 
 @login_required
-def edit(request):
+def edit_profile(request):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
@@ -75,4 +75,24 @@ def edit(request):
         user_form = forms.UserEditForm(instance=request.user)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile)
         return render(request, 'auth_system/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def info_profile(request, pk):
+    if request.method == 'GET':
+        profile = models.UserProfile.objects.get(id=pk)
+        return render(request, 'auth_system/profile_info.html', {'profile': profile})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
