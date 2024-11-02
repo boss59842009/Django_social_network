@@ -11,14 +11,14 @@ class SubscriptionManager(models.Manager):
         return self.get(follower=follower, following=following).delete()
 
     def is_following(self, follower, following):
-        return self.get(follower=follower, following=following).exists()
+        return self.filter(follower=follower, following=following).exists()
 
     def is_followed_by(self, follower, following):
-        return self.get(follower=following, following=follower).exists()
+        return self.filter(follower=following, following=follower).exists()
 
 
 class User(AbstractUser):
-    first_login = models.DateTimeField(null=True)
+    first_login = models.DateTimeField(auto_now_add=True)
     phone_number = models.CharField(max_length=18)
 
 
@@ -49,6 +49,6 @@ class Subscription(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.follower.username} following {self.following.username}'
+        return f'{self.follower.user.username} following {self.following.user.username}'
 
 

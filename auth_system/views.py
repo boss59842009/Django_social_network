@@ -81,12 +81,35 @@ def edit_profile(request):
 def info_profile(request, pk):
     if request.method == 'GET':
         profile = models.UserProfile.objects.get(id=pk)
-        return render(request, 'auth_system/profile_info.html', {'profile': profile})
+        user = models.UserProfile.objects.get(id=request.user.pk)
+        is_follow = models.Subscription.objects.is_following(follower=user, following=profile)
+        return render(request, 'auth_system/profile_info.html', {'profile': profile, 'is_follow': is_follow})
 
 
+@login_required
+def profiles_list(request):
+    if request.method == 'GET':
+        profiles = models.UserProfile.objects.all()
+        return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
 
 
+# @login_required
+# def followed_profiles_list(request):
+#     if request.method == 'GET':
+#         profiles = models.UserProfile.followers()
+#         return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
 
+
+@login_required
+def follow_unfollow_profile(request, pk):
+    if request.method == 'GET':
+        follower = models.UserProfile.objects.get(id=request.user.pk)
+        following = models.UserProfile.objects.get(id=pk)
+        if models.Subscription.objects.is_following(follower, following):
+            models.Subscription.objects.unfollow(follower, following)
+        else:
+            models.Subscription.objects.follow(follower, following)
+        return redirect('info-profile', pk=pk)
 
 
 

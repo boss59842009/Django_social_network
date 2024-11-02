@@ -3,15 +3,19 @@
 {% block title %}Профіль користувача{% endblock %}
 {% block content %}
 <div class="col-6 p-2 my-2 bg-light">
-    <h5>{% if request.user.userprofile.avatar %}
-            <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
+    <h5>{% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Фото профілю" width="40" height="40"
                 class="rounded-circle">
         {% else %}
             <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
                 class="rounded-circle">
         {% endif %}
-        {{ request.user.first_name }} {{ request.user.last_name }}</h5>
-    <p><button type="button">Follow</button></p>
+        {{ profile.user.first_name }} {{ profile.user.last_name }}</h5>
+    {% if is_follow %}
+    <p><a href="{% url 'follow-profile' profile.pk %}"><button type="button">Unfollow</button></a></p>
+    {% else %}
+    <p><a href="{% url 'follow-profile' profile.pk %}"><button type="button">Follow</button></a></p>
+    {% endif %}
     <p><b>Стать:</b> {{ profile.get_gender_display }}</p>
     <p><b>Дата народження:</b> {{ profile.birthday|date:"d.m.Y" }}</p>
     <p><b>Номер телефону:</b> {{ profile.user.phone_number }}</p>
