@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView" />
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
+      <change afterPath="$PROJECT_DIR$/auth_system/decorators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/auth_system/followed_profiles_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth_system/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header_custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header_custom.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -42,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.Runserver.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/posts",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.Runserver.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/auth_system&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/posts" />
       <recent name="$PROJECT_DIR$/templates/auth_system" />
+      <recent name="$PROJECT_DIR$/templates/posts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/auth_system" />

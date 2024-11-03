@@ -1,13 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from auth_system import forms
 from auth_system import models
+from auth_system.decorators import user_is_owner_required
 
 
 @login_required
@@ -63,7 +64,8 @@ class UserRegistrationView(CreateView):
 
 
 @login_required
-def edit_profile(request):
+@user_is_owner_required(lambda pk: get_object_or_404(models.UserProfile, id=pk))
+def edit_profile(request, pk):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
@@ -89,15 +91,18 @@ def info_profile(request, pk):
 @login_required
 def profiles_list(request):
     if request.method == 'GET':
-        profiles = models.UserProfile.objects.all()
+        # profiles = models.UserProfile.objects.all()
+        profiles = models.UserProfile.objects.exclude(id=request.user.pk)
         return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
 
 
-# @login_required
-# def followed_profiles_list(request):
-#     if request.method == 'GET':
-#         profiles = models.UserProfile.followers()
-#         return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
+@login_required
+def followed_profiles_list(request):
+    if request.method == 'GET':
+        # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
+        subscriptions = models.Subscription.objects.filter(follower=request.user.pk).select_related('following')
+        profiles = [subscription.following for subscription in subscriptions]
+        return render(request, 'auth_system/followed_profiles_list.html', {'profiles': profiles})
 
 
 @login_required
