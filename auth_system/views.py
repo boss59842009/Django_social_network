@@ -92,7 +92,7 @@ def info_profile_view(request, pk):
 def profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.all()
-        profiles = models.UserProfile.objects.exclude(id=request.user.pk)
+        profiles = models.UserProfile.objects.exclude(id=request.user.userprofile.pk)
         return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
 
 

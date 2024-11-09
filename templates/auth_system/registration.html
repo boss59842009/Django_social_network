@@ -36,11 +36,21 @@
                        name="{{ form.last_name.html_name }}"
                        id="{{ form.last_name.id_for_label }}" required>
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="{{ form.username.id_for_label }}">@</span>
-                <input type="text" class="form-control" placeholder="Username" name="{{ form.username.html_name }}"
-                       aria-label="Username" aria-describedby="{{ form.username.id_for_label }}" required>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="{{ form.username.id_for_label }}">@</span>
+                    <input type="text" class="form-control" placeholder="Username" name="{{ form.username.html_name }}"
+                           aria-label="Username" aria-describedby="{{ form.username.id_for_label }}" required>
+                </div>
             </div>
+<!--            <div class="col-md-6">-->
+<!--                <select class="form-select" aria-label="Default select example">-->
+<!--                    <option selected>Open this select menu</option>-->
+<!--                    <option value="1">One</option>-->
+<!--                    <option value="2">Two</option>-->
+<!--                    <option value="3">Three</option>-->
+<!--                </select>-->
+<!--            </div>-->
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Email" name="{{ form.email.html_name }}"
                        aria-label="Email" aria-describedby="{{ form.email.id_for_label }}" required>
@@ -62,18 +72,12 @@
                        name="{{ form.password2.html_name }}"
                        id="{{ form.password2.id_for_label }}" required>
             </div>
-
-
             {% csrf_token %}
-
-<!--            {{ form.as_p }}-->
-            <button class="btn btn-dark w-100 py-2" type="submit">Зареєструватись</button>
+           <div class="d-flex justify-content-center">
+                <a type="button" href="{% url 'login' %}" class="btn btn-dark me-4" role="button">Назад</a>
+                <button class="btn btn-success w-100" type="submit">Зареєструватись</button>
+            </div>
         </form>
     </div>
 
-<!--<form method="POST">-->
-<!--    {{ form.as_p }}-->
-<!--    {% csrf_token %}-->
-<!--    <p><input type="submit" class="btn btn-dark" value="Реєстрація"></p>-->
-<!--</form>-->
 </body>

@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'phone_number')}),
         ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('first_login', 'last_login', 'date_joined')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
 
 
