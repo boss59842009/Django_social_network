@@ -40,7 +40,7 @@ def all_posts_view(request):
 
 
 @login_required
-def delete_post(request, pk):
+def delete_post_view(request, pk):
     post = models.Post.objects.get(id=pk)
     if request.user.username != post.user.username:
         return redirect('post-detail', pk=pk)

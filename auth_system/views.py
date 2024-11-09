@@ -17,7 +17,7 @@ def index(request):
     return render(request, 'auth_system/index.html')
 
 
-def user_login(request):
+def user_login_view(request):
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
         if form.is_valid():
@@ -65,7 +65,7 @@ class UserRegistrationView(CreateView):
 
 @login_required
 @user_is_owner_required(lambda pk: get_object_or_404(models.UserProfile, id=pk))
-def edit_profile(request, pk):
+def edit_profile_view(request, pk):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
@@ -80,7 +80,7 @@ def edit_profile(request, pk):
 
 
 @login_required
-def info_profile(request, pk):
+def info_profile_view(request, pk):
     if request.method == 'GET':
         profile = models.UserProfile.objects.get(id=pk)
         user = models.UserProfile.objects.get(id=request.user.pk)
@@ -89,7 +89,7 @@ def info_profile(request, pk):
 
 
 @login_required
-def profiles_list(request):
+def profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.all()
         profiles = models.UserProfile.objects.exclude(id=request.user.pk)
@@ -97,7 +97,7 @@ def profiles_list(request):
 
 
 @login_required
-def followed_profiles_list(request):
+def followed_profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
         subscriptions = models.Subscription.objects.filter(follower=request.user.pk).select_related('following')
@@ -106,7 +106,7 @@ def followed_profiles_list(request):
 
 
 @login_required
-def follow_unfollow_profile(request, pk):
+def follow_unfollow_profile_view(request, pk):
     if request.method == 'GET':
         follower = models.UserProfile.objects.get(id=request.user.pk)
         following = models.UserProfile.objects.get(id=pk)
