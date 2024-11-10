@@ -15,9 +15,11 @@ from posts.mixins import UserIsAuthorMixin
 @login_required
 def all_posts_view(request):
     if request.method == 'GET':
+        # following_profiles = models.Subscription.objects.filter(follower=request.user.userprofile).values_list(
+        #     'follower', flat=True)
         posts = models.Post.objects.all().annotate(total_likes=Count('likes'), is_liked=Count('likes',
-                                                                                              filter=Q(
-                                                                                                  likes__id=request.user.pk)))
+                                                                                              filter=Q(likes__id=request.user.pk)))
+
         posts = posts.order_by('-updated_at')
         create_post_form = forms.PostForm()
         context = {

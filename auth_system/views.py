@@ -60,7 +60,7 @@ class UserRegistrationView(CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        return HttpResponse("Not valid")
+        return redirect('registration')
 
 
 @login_required
@@ -72,7 +72,7 @@ def edit_profile_view(request, pk):
         if user_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect('index')
+            return redirect('info-profile', pk=pk)
     else:
         user_form = forms.UserEditForm(instance=request.user)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile)
@@ -83,7 +83,7 @@ def edit_profile_view(request, pk):
 def info_profile_view(request, pk):
     if request.method == 'GET':
         profile = models.UserProfile.objects.get(id=pk)
-        user = models.UserProfile.objects.get(id=request.user.pk)
+        user = models.UserProfile.objects.get(id=request.user.userprofile.pk)
         is_follow = models.Subscription.objects.is_following(follower=user, following=profile)
         return render(request, 'auth_system/profile_info.html', {'profile': profile, 'is_follow': is_follow})
 
@@ -100,7 +100,7 @@ def profiles_list_view(request):
 def followed_profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
-        subscriptions = models.Subscription.objects.filter(follower=request.user.pk).select_related('following')
+        subscriptions = models.Subscription.objects.filter(follower=request.user.userprofile.pk).select_related('following')
         profiles = [subscription.following for subscription in subscriptions]
         return render(request, 'auth_system/followed_profiles_list.html', {'profiles': profiles})
 
@@ -108,12 +108,13 @@ def followed_profiles_list_view(request):
 @login_required
 def follow_unfollow_profile_view(request, pk):
     if request.method == 'GET':
-        follower = models.UserProfile.objects.get(id=request.user.pk)
+        follower = models.UserProfile.objects.get(id=request.user.userprofile.pk)
         following = models.UserProfile.objects.get(id=pk)
         if models.Subscription.objects.is_following(follower, following):
             models.Subscription.objects.unfollow(follower, following)
         else:
             models.Subscription.objects.follow(follower, following)
+            print('follow')
         return redirect('info-profile', pk=pk)
 
 
