@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.text import slugify
+
+from django.conf import settings
 
 
 class SubscriptionManager(models.Manager):
@@ -20,6 +23,12 @@ class SubscriptionManager(models.Manager):
 class User(AbstractUser):
     first_login = models.DateTimeField(auto_now_add=True)
     phone_number = models.CharField(max_length=18)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.username)
+        super().save(*args, **kwargs)
 
 
 class UserProfile(models.Model):
@@ -32,15 +41,15 @@ class UserProfile(models.Model):
     avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICE, default='-')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Profile for {self.user.username}'
 
 
 class Subscription(models.Model):
-    follower = models.ForeignKey(UserProfile, related_name='following', on_delete=models.CASCADE)
-    following = models.ForeignKey(UserProfile, related_name='followers', on_delete=models.CASCADE)
+    follower = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='followers', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     objects = SubscriptionManager()
 
@@ -49,6 +58,6 @@ class Subscription(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.follower.user.username} following {self.following.user.username}'
+        return f'{self.follower.username} following {self.following.username}'
 
 

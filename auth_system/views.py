@@ -64,15 +64,15 @@ class UserRegistrationView(CreateView):
 
 
 @login_required
-@user_is_owner_required(lambda pk: get_object_or_404(models.UserProfile, id=pk))
-def edit_profile_view(request, pk):
+@user_is_owner_required(lambda slug: get_object_or_404(models.User, slug=slug))
+def edit_profile_view(request, slug):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
         if user_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect('info-profile', pk=pk)
+            return redirect('user-info', slug=slug)
     else:
         user_form = forms.UserEditForm(instance=request.user)
         profile_form = forms.ProfileEditForm(instance=request.user.userprofile)
@@ -80,42 +80,41 @@ def edit_profile_view(request, pk):
 
 
 @login_required
-def info_profile_view(request, pk):
+def info_profile_view(request, slug):
     if request.method == 'GET':
-        profile = models.UserProfile.objects.get(id=pk)
-        user = models.UserProfile.objects.get(id=request.user.userprofile.pk)
-        is_follow = models.Subscription.objects.is_following(follower=user, following=profile)
-        return render(request, 'auth_system/profile_info.html', {'profile': profile, 'is_follow': is_follow})
+        user_info = models.User.objects.get(slug=slug)
+        request_user = models.User.objects.get(slug=request.user.slug)
+        is_follow = models.Subscription.objects.is_following(follower=request_user, following=user_info)
+        return render(request, 'auth_system/profile_info.html', {'user': user_info, 'is_follow': is_follow})
 
 
 @login_required
 def profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.all()
-        profiles = models.UserProfile.objects.exclude(id=request.user.userprofile.pk)
-        return render(request, 'auth_system/profiles_list.html', {'profiles': profiles})
+        users = models.User.objects.exclude(slug=request.user.slug)
+        return render(request, 'auth_system/profiles_list.html', {'users': users})
 
 
 @login_required
 def followed_profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
-        subscriptions = models.Subscription.objects.filter(follower=request.user.userprofile.pk).select_related('following')
-        profiles = [subscription.following for subscription in subscriptions]
-        return render(request, 'auth_system/followed_profiles_list.html', {'profiles': profiles})
+        subscriptions = models.Subscription.objects.filter(follower=request.user).select_related('following')
+        users = [subscription.following for subscription in subscriptions]
+        return render(request, 'auth_system/followed_profiles_list.html', {'users': users})
 
 
 @login_required
-def follow_unfollow_profile_view(request, pk):
+def follow_unfollow_profile_view(request, slug):
     if request.method == 'GET':
-        follower = models.UserProfile.objects.get(id=request.user.userprofile.pk)
-        following = models.UserProfile.objects.get(id=pk)
+        follower = models.User.objects.get(slug=request.user.slug)
+        following = models.User.objects.get(slug=slug)
         if models.Subscription.objects.is_following(follower, following):
             models.Subscription.objects.unfollow(follower, following)
         else:
             models.Subscription.objects.follow(follower, following)
-            print('follow')
-        return redirect('info-profile', pk=pk)
+        return redirect('user-info', slug=slug)
 
 
 

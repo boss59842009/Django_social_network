@@ -9,8 +9,8 @@
 
         <ul class="nav col-12 col-lg-auto m-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{% url 'all-posts' %}" class="nav-link px-2 link-secondary">Головна</a></li>
-          <li><a href="{% url 'followed-profiles_list' %}" class="nav-link px-2 link-body-emphasis">Друзі</a></li>
-          <li><a href="{% url 'profiles-list' %}" class="nav-link px-2 link-body-emphasis">Користувачі</a></li>
+          <li><a href="{% url 'followed-users-list' %}" class="nav-link px-2 link-body-emphasis">Друзі</a></li>
+          <li><a href="{% url 'users-list' %}" class="nav-link px-2 link-body-emphasis">Користувачі</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
         </ul>
 
@@ -30,8 +30,9 @@
             {% endif %}
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="{% url 'info-profile' request.user.userprofile.id %}">{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
-            <li><a class="dropdown-item" href="{% url 'edit-profile' request.user.userprofile.id %}">Налаштування</a></li>
+            <li><a class="dropdown-item" href="{% url 'user-info' request.user.slug %}">{{ request.user.first_name }}
+              {{ request.user.last_name }}</a></li>
+            <li><a class="dropdown-item" href="{% url 'user-edit' request.user.slug %}">Налаштування</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form id="logout" class="d-flex" action='{% url "logout" %}' method="post">

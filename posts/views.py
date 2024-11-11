@@ -34,7 +34,7 @@ def all_posts_view(request):
             models.Post.objects.create(
                 text=data['text'],
                 image=data['image'],
-                user=request.user
+                author=request.user
             )
             return redirect('all-posts')
         else:
@@ -44,7 +44,7 @@ def all_posts_view(request):
 @login_required
 def delete_post_view(request, pk):
     post = models.Post.objects.get(id=pk)
-    if request.user.username != post.user.username:
+    if request.user.username != post.author.username:
         return redirect('post-detail', pk=pk)
 
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def post_detail_view(request, pk):
 
         likes = post.total_likes()
         context.update({'likes_count': likes})
-        context.update({'is_author': post.user == request.user})
+        context.update({'is_author': post.author == request.user})
 
         create_comment_form = forms.CommentForm()
         context.update({'create_comment_form': create_comment_form})
