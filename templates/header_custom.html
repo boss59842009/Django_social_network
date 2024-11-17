@@ -1,0 +1,48 @@
+{% load static %}
+<header class="p-3 border-bottom bg-light">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center">
+        <a href="{% url 'all-posts' %}"
+           class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+          <i class="fa-solid fa-house"></i>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto m-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'all-posts' %}" class="nav-link px-2 link-secondary">Головна</a></li>
+          <li><a href="{% url 'followed-users-list' %}" class="nav-link px-2 link-body-emphasis">Друзі</a></li>
+          <li><a href="{% url 'users-list' %}" class="nav-link px-2 link-body-emphasis">Користувачі</a></li>
+          <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+        </ul>
+
+        <form class="d-flex align-items-center col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control me-3" placeholder="Пошук..." aria-label="Search">
+            <button type="submit" class="btn btn-outline-dark">Пошук</button>
+        </form>
+
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if request.user.userprofile.avatar %}
+            <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
+                 class="rounded-circle">
+            {% else %}
+            <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
+                 class="rounded-circle">
+            {% endif %}
+          </a>
+          <ul class="dropdown-menu text-small" style="">
+            <li><a class="dropdown-item" href="{% url 'user-info' request.user.slug %}">{{ request.user.first_name }}
+              {{ request.user.last_name }}</a></li>
+            <li><a class="dropdown-item" href="{% url 'user-edit' request.user.slug %}">Налаштування</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <form id="logout" class="d-flex" action='{% url "logout" %}' method="post">
+                {% csrf_token %}
+                <a class="dropdown-item" onclick="document.getElementById('logout').submit(); return false;">Вихід
+                </a>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
