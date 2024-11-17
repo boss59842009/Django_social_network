@@ -5,20 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/decorators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth_system/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/mixins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/followed_profiles_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/followed_profiles_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/profile_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/profile_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/profiles_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/profiles_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header_custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header_custom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/posts/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/post_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/posts/posts_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/posts_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_system/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
