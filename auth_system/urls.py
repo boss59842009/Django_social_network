@@ -3,7 +3,6 @@ from auth_system import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    # path('login/', views.user_login_view, name='login'),
     path('accounts/login/', views.user_login_view, name='login'),
     path('accounts/', include('allauth.urls')),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),

@@ -54,6 +54,7 @@ def on_user_login(sender, request, user, **kwargs):
     except SocialAccount.DoesNotExist:
         pass
 
+
 class CustomLogoutView(LogoutView):
     next_page = 'login'
 
