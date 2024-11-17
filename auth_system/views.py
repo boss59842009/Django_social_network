@@ -1,5 +1,9 @@
+from allauth.account.signals import user_logged_in
+from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
+from django.contrib import messages
+from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -22,6 +26,7 @@ def user_login_view(request):
         form = forms.LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
             user = authenticate(username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
@@ -36,9 +41,18 @@ def user_login_view(request):
     return render(request, 'auth_system/login.html', {'form': form})
 
 
-# class CustomLoginView(LoginView):
-#     template_name = 'auth_system/login.html'
-#     redirect_authenticated_user = True
+@receiver(user_logged_in)
+def on_user_login(sender, request, user, **kwargs):
+    try:
+        social_account = SocialAccount.objects.get(user=user, provider='google')
+        extra_data = social_account.extra_data
+        profile = models.UserProfile.objects.create(user=social_account.user)
+        # avatar = social_account.extra_data.get('picture', '')
+        # if avatar:
+        #     profile.avatar = avatar
+        profile.save()
+    except SocialAccount.DoesNotExist:
+        pass
 
 
 class CustomLogoutView(LogoutView):
