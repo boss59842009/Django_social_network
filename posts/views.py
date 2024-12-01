@@ -11,7 +11,6 @@ from posts import models, forms
 from auth_system.models import User
 from posts.mixins import UserIsAuthorMixin
 
-
 @login_required
 def all_posts_view(request):
     if request.method == 'GET':

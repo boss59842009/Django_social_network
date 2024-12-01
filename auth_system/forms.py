@@ -7,6 +7,7 @@ from auth_system import models
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    remember_me = forms.BooleanField(required=False)
 
 
 class UserRegistrationForm(forms.ModelForm):
