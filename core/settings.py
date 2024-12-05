@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 60
+SESSION_COOKIE_AGE = 60 * 24 * 14
 # Application definition
 
 INSTALLED_APPS = [

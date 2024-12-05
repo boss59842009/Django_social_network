@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Q
 
 
 class Chat(models.Model):
@@ -14,6 +15,19 @@ class Chat(models.Model):
     def __str__(self):
         return f'Chat between {self.sender.username} and {self.recipient.username}'
 
+    def get_or_create_chat(self, user1, user2):
+        chat = self.objects.filter(
+            (Q(sender=user1) & Q(recipient=user2)) | (Q(sender=user2) & Q(recipient=user1))
+        ).first()
+        if chat:
+            return chat
+
+        chat = self.objects.create(sender=user1, recipient=user2)
+        return chat
+
+    def is_user_in_chat(self, user):
+        return self.sender == user or self.recipient == user
+
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
@@ -27,5 +41,5 @@ class Message(models.Model):
         ordering = ['sent_at']
 
     def __str__(self):
-        return f'Message from {self.sender.username} in chat {self.chat}'
+        return f'Message from {self.sender.username} in chat {self.chat.id}'
 
