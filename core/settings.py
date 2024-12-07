@@ -36,7 +36,6 @@ SESSION_COOKIE_AGE = 60 * 24 * 14
 
 INSTALLED_APPS = [
     'daphne',
-
     'chats',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,11 +129,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Kiev'
-
 USE_I18N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -153,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'auth_system.User'
 
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/posts/all/'
 # LOGOUT_REDIRECT_URL = 'logout'
 
 MEDIA_URL = '/media/'

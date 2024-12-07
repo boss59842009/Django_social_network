@@ -33,6 +33,7 @@
             <li><a class="dropdown-item" href="{% url 'user-info' request.user.slug %}">{{ request.user.first_name }}
               {{ request.user.last_name }}</a></li>
             <li><a class="dropdown-item" href="{% url 'user-edit' request.user.slug %}">Налаштування</a></li>
+            <li><a class="dropdown-item" href="{% url 'chats' %}">Чати</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form id="logout" class="d-flex" action='{% url "logout" %}' method="post">

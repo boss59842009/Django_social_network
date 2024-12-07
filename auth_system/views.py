@@ -15,12 +15,6 @@ from auth_system import models
 from auth_system.decorators import user_is_owner_required
 
 
-@login_required
-def index(request):
-    # if request.method == 'GET':
-    return render(request, 'auth_system/index.html')
-
-
 def user_login_view(request):
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
@@ -32,7 +26,7 @@ def user_login_view(request):
                     login(request, user)
                     if not cd['remember_me']:
                         request.session.set_expiry(0)
-                    return redirect('index')
+                    return redirect('all-posts')
                 else:
                     return HttpResponse("Користувача відключено!")
             else:

@@ -2,7 +2,6 @@ from django.urls import path, include
 from auth_system import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path('accounts/login/', views.user_login_view, name='login'),
     path('accounts/', include('allauth.urls')),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),

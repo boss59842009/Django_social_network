@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ваші чати{% endblock %}
+
+{% block content %}
+<div class="col-6 p-2">
+{% for chat in chats %}
+    <div class="card mb-2 p-2">
+        <div class="card-body p-0">
+            <h5 class="card-title mb-1">
+            {% if chat.recipient.userprofile.avatar %}
+            <img src="{{ chat.recipient.userprofile.avatar.url }}" alt="Фото профілю" width="32" height="32"
+                 class="rounded-circle">
+            {% else %}
+            <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32" height="32"
+                 class="rounded-circle">
+            {% endif %}
+            {{ chat.recipient.first_name }} {{ chat.recipient.last_name }}</h5>
+            <p class="card-text mb-1"><small class="text-muted">{{ chat.created_at|date:"d.m.Y" }}</small></p>
+            <h6 class="card-text mb-2">{{ post.text }}</h6>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
