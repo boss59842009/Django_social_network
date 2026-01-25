@@ -53,7 +53,6 @@ def on_user_login(sender, request, user, **kwargs):
 class CustomLogoutView(LogoutView):
     next_page = 'login'
 
-
 class UserRegistrationView(CreateView):
     template_name = 'auth_system/registration.html'
     form_class = forms.UserRegistrationForm
@@ -77,14 +76,14 @@ class UserRegistrationView(CreateView):
 def edit_profile_view(request, slug):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
-        profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
+        profile_form = forms.ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
         if user_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('user-info', slug=slug)
     else:
         user_form = forms.UserEditForm(instance=request.user)
-        profile_form = forms.ProfileEditForm(instance=request.user.userprofile)
+        profile_form = forms.ProfileEditForm(instance=request.user.profile)
         return render(request, 'auth_system/edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 

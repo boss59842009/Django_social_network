@@ -22,13 +22,21 @@ class SubscriptionManager(models.Manager):
 
 class User(AbstractUser):
     first_login = models.DateTimeField(auto_now_add=True)
-    phone_number = models.CharField(max_length=18)
+    phone_number = models.CharField(max_length=18, verbose_name='Номер телефону')
     slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.username)
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.username} - "
+    
+    class Meta:
+        verbose_name = 'Користувач'
+        verbose_name_plural = 'Користувачі'
+        ordering = ['-first_login']
 
 
 class UserProfile(models.Model):
@@ -37,15 +45,18 @@ class UserProfile(models.Model):
         ('male', 'чоловіча'),
         ('female', 'жіноча')
     )
-    bio = models.TextField(blank=True, null=True)
-    avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True)
-    birthday = models.DateField(blank=True, null=True)
-    gender = models.CharField(max_length=6, choices=GENDER_CHOICE, default='-')
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True, null=True, verbose_name='Біографія')
+    avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True, verbose_name='Аватар')
+    birthday = models.DateField(blank=True, null=True, verbose_name='Дата народження')
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICE, default='-', verbose_name='Стать')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):
         return f'Profile for {self.user.username}'
-
+    
+    class Meta:
+        verbose_name = 'Профіль'
+        verbose_name_plural = 'Профілі'
 
 class Subscription(models.Model):
     follower = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following', on_delete=models.CASCADE)
@@ -59,5 +70,10 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.follower.username} following {self.following.username}'
+    
+    class Meta:
+        verbose_name = 'Підписка'
+        verbose_name_plural = 'Підписки'
+        ordering = ['-created_at']
 
 

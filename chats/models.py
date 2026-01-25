@@ -16,18 +16,14 @@ class Chat(models.Model):
         return f'Chat between {self.sender.username} and {self.recipient.username}'
 
     @classmethod
-    def get_or_create_chat(cls, user1_id, user2_id):
+    def get_or_create_chat(cls, chat_id, user_id):
         chat = cls.objects.filter(
-                (Q(sender_id=user1_id) & Q(recipient_id=user2_id)) | (Q(sender_id=user2_id) & Q(recipient_id=user1_id))
-            ).first()
+                (Q(sender_id=user_id) | Q(recipient_id=user_id)) & (Q(id=chat_id))).first()
         if chat:
             return chat
 
-        chat = cls.objects.create(sender_id=user1_id, recipient_id=user2_id)
-        return chat
-
-    def is_user_in_chat(self, user_id):
-        return self.sender.id == user_id or self.recipient.id == user_id
+        # chat = cls.objects.create(sender_id=user1_id, recipient_id=user2_id)
+        # return chat
 
 
 class Message(models.Model):

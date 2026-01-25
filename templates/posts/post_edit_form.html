@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Редагування посту{% endblock %}
 {% block content %}
-<div class="col-6 p-2 my-2 bg-light">
+<div class="col-6 p-4 my-2 bg-light border border-dark rounded mt-2">
     <h1>Редагування посту</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}

@@ -8,17 +8,18 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from posts import models, forms
-from auth_system.models import User
+from auth_system.models import User, Subscription
 from posts.mixins import UserIsAuthorMixin
 
 @login_required
 def all_posts_view(request):
     if request.method == 'GET':
-        # following_profiles = models.Subscription.objects.filter(follower=request.user.userprofile).values_list(
-        #     'follower', flat=True)
-        posts = models.Post.objects.all().annotate(total_likes=Count('likes'), is_liked=Count('likes',
-                                                                                              filter=Q(likes__id=request.user.pk)))
-
+        following_users = Subscription.objects.filter(follower=request.user).values_list('following', flat=True)
+        posts = (
+            models.Post.objects.filter(Q(author__in=following_users) | Q(author=request.user)).annotate(total_likes=Count('likes'),
+                is_liked=Count('likes', filter=Q(likes__id=request.user.pk))
+            )
+        )
         posts = posts.order_by('-updated_at')
         create_post_form = forms.PostForm()
         context = {
@@ -92,13 +93,12 @@ def post_detail_view(request, pk):
 def like_unlike_view(request, pk):
     if request.method == 'GET':
         post = models.Post.objects.get(id=pk)
-        user = User.objects.get(username=request.user)
-        if post.user_is_liked(request.user):
+        user = User.objects.get(username=request.user.username)
+        if post.user_is_liked(user):
             post.likes.remove(user)
-            return redirect('post-detail', pk=pk)
         else:
             post.likes.add(user)
-            return redirect('post-detail', pk=pk)
+        return redirect('post-detail', pk=pk)
     else:
         return redirect('all-posts')
 
