@@ -4,25 +4,28 @@
       <div class="d-flex flex-wrap align-items-center justify-content-center">
         <a href="{% url 'all-posts' %}"
            class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-          <i class="fa-solid fa-house"></i>
+           <i class="fa-duotone fa-solid fa-users fa-fade fa-2xl" style="--fa-primary-color: #0b58ca; --fa-secondary-color: #6599ec;"></i>
         </a>
+        <form class="d-flex align-items-center col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ms-lg-3" role="search">
+          <input type="search" class="form-control me-3" placeholder="Пошук..." aria-label="Search">
+          <button type="submit" class="btn btn-outline-dark">Пошук</button>
+        </form>
 
         <ul class="nav col-12 col-lg-auto m-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'all-posts' %}" class="nav-link px-2 link-secondary">Головна</a></li>
           <li><a href="{% url 'followed-users-list' %}" class="nav-link px-2 link-body-emphasis">Друзі</a></li>
           <li><a href="{% url 'users-list' %}" class="nav-link px-2 link-body-emphasis">Користувачі</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
         </ul>
-
-        <form class="d-flex align-items-center col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control me-3" placeholder="Пошук..." aria-label="Search">
-            <button type="submit" class="btn btn-outline-dark">Пошук</button>
-        </form>
+        
+        <div class="d-flex align-items-center mx-3">
+          <a class="nav-link px-2 link-body-emphasis fs-5 fw-bold" href="{% url 'chats_list' %}">Чати</a>
+          <i class="fa-solid fa-moon fa-2xl mx-2" style="color: #0b58c8;"></i>
+        </div>
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            {% if request.user.userprofile.avatar %}
-            <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
+            {% if request.user.profile.avatar %}
+            <img src="{{ request.user.profile.avatar.url }}" alt="Фото профілю" width="40" height="40"
                  class="rounded-circle">
             {% else %}
             <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
@@ -30,15 +33,13 @@
             {% endif %}
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="{% url 'user-info' request.user.slug %}">{{ request.user.first_name }}
-              {{ request.user.last_name }}</a></li>
-            <li><a class="dropdown-item" href="{% url 'user-edit' request.user.slug %}">Налаштування</a></li>
-            <li><a class="dropdown-item" href="{% url 'chats_list' %}">Чати</a></li>
+            <li><a class="dropdown-item" href="{% url 'user-info' request.user.slug %}"><i class="fa-solid fa-user fa-lg" style="color: #0b58ca;"></i> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+            <li><a class="dropdown-item" href="{% url 'user-edit' request.user.slug %}"><i class="fa-solid fa-user-pen fa-lg" style="color: #0b58ca;"></i> Налаштування</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form id="logout" class="d-flex" action='{% url "logout" %}' method="post">
                 {% csrf_token %}
-                <a class="dropdown-item" onclick="document.getElementById('logout').submit(); return false;">Вихід
+                <a class="dropdown-item" onclick="document.getElementById('logout').submit(); return false;"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: #0b58ca;"></i> Вихід
                 </a>
               </form>
             </li>

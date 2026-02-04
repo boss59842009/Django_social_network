@@ -18,8 +18,8 @@
           </div>
           <div class="modal-body">
             <h5>
-              {% if request.user.userprofile.avatar %}
-                <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
+              {% if request.user.profile.avatar %}
+                <img src="{{ request.user.profile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
               {% else %}
                 <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
               {% endif %}
@@ -43,14 +43,14 @@
     {% for post in posts %}
       <div class="card mb-2 p-2">
         <div class="card-body p-0">
-          <h5 class="card-title mb-1">
-            {% if post.author.userprofile.avatar %}
-              <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профілю" width="32" height="32" class="rounded-circle" />
+          <a href="{% url 'user-info' post.author.slug %}" class="card-title mb-1 text-decoration-none fs-5">
+            {% if post.author.profile.avatar %}
+              <img src="{{ post.author.profile.avatar.url }}" alt="Фото профілю" width="32" height="32" class="rounded-circle" />
             {% else %}
               <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32" height="32" class="rounded-circle" />
             {% endif %}
             {{ post.author.first_name }} {{ post.author.last_name }}
-          </h5>
+          </a>
           <p class="card-text mb-1">
             <small class="text-muted">{{ post.updated_at|date:'d.m.Y' }}</small>
           </p>
@@ -64,11 +64,11 @@
         <div class="d-flex justify-content-start py-1">
           {% if post.is_liked %}
             <p class="m-0 pe-2">
-              <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{ post.total_likes }}
+              <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart fa-lg"></i></a> {{ post.total_likes }}
             </p>
           {% else %}
             <p class="m-0 pe-2">
-              <a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ post.total_likes }}
+              <a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart fa-lg"></i></a> {{ post.total_likes }}
             </p>
           {% endif %}
           <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>

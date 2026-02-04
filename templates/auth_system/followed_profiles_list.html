@@ -8,14 +8,14 @@
     <div class="card mb-2 p-2">
         <div class="card-body p-0">
             <h5 class="card-title mb-1">
-            {% if user.userprofile.avatar %}
-            <img src="{{ user.userprofile.avatar.url }}" alt="Фото профілю" width="32" height="32"
+            {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="Фото профілю" width="32" height="32"
                  class="rounded-circle">
             {% else %}
             <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32" height="32"
                  class="rounded-circle">
             {% endif %}
-                <a href="{% url 'user-info' user.slug %}">{{ user.first_name }} {{ user.last_name }}</a></h5>
+                <a class="text-decoration-none fs-5" href="{% url 'user-info' user.slug %}">{{ user.first_name }} {{ user.last_name }}</a></h5>
             <p class="card-text mb-1"><small class="text-muted">{{ user.first_login|date:"d.m.Y" }}</small></p>
         </div>
     </div>

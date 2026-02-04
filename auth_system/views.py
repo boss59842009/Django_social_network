@@ -108,7 +108,7 @@ def profiles_list_view(request):
 def followed_profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
-        subscriptions = models.Subscription.objects.filter(follower=request.user).select_related('following')
+        subscriptions = models.Subscription.objects.filter(follower=request.user)
         users = [subscription.following for subscription in subscriptions]
         return render(request, 'auth_system/followed_profiles_list.html', {'users': users})
 

@@ -6,8 +6,8 @@
 {% block content %}
   <div class="col-6 p-2 my-2 bg-light">
     <h2>
-      {% if post.author.userprofile.avatar %}
-        <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
+      {% if post.author.profile.avatar %}
+        <img src="{{ post.author.profile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
       {% else %}
         <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
       {% endif %}
@@ -26,11 +26,11 @@
       <div class="d-flex text-start">
         {% if is_liked %}
           <p class="py-2">
-            <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{ likes_count }}
+            <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart fa-lg"></i></a> {{ likes_count }}
           </p>
         {% else %}
           <p class="py-2">
-            <a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ likes_count }}
+            <a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart fa-lg"></i></a> {{ likes_count }}
           </p>
         {% endif %}
         <!-- <p><a href="{% url 'delete-post' post.pk %}"><button type="button" class="btn btn-primary m-2 btn-sm"> -->
@@ -45,14 +45,16 @@
         {% endif %}
       </div>
     </div>
+    <!-- Профіль автора -->
     <h5>
-      {% if request.user.userprofile.avatar %}
-        <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
+      {% if request.user.profile.avatar %}
+        <img src="{{ request.user.profile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
       {% else %}
         <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
       {% endif %}
       {{ request.user.first_name }} {{ request.user.last_name }}
     </h5>
+    <!-- Форма для коментування -->
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-floating">
@@ -64,12 +66,13 @@
       </div>
       <button type="submit" class="btn btn-success">Коментувати</button>
     </form>
+    <!-- Коментарі -->
     {% for comment in comments %}
-      <div class="card my-2 ms-5">
+      <div class="card my-2">
         <div class="card-body">
           <h6 class="card-title">
-            {% if comment.author.userprofile.avatar %}
-              <img src="{{ comment.author.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
+            {% if comment.author.profile.avatar %}
+              <img src="{{ comment.author.profile.avatar.url }}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
             {% else %}
               <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40" class="rounded-circle" />
             {% endif %}

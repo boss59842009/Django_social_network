@@ -1,42 +1,29 @@
 from django.db import models
 from django.conf import settings
-from django.db.models import Q
 
+
+class ChatParticipant(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_participations', verbose_name='Користувач')
+    chat = models.ForeignKey('Chat', on_delete=models.CASCADE, related_name='chat_participants', verbose_name='Чат')
+    is_admin = models.BooleanField(default=False, verbose_name='Адміністратор')
 
 class Chat(models.Model):
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_invited')
-    recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_received')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('sender', 'recipient')
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return f'Chat between {self.sender.username} and {self.recipient.username}'
-
-    @classmethod
-    def get_or_create_chat(cls, chat_id, user_id):
-        chat = cls.objects.filter(
-                (Q(sender_id=user_id) | Q(recipient_id=user_id)) & (Q(id=chat_id))).first()
-        if chat:
-            return chat
-
-        # chat = cls.objects.create(sender_id=user1_id, recipient_id=user2_id)
-        # return chat
-
+    is_group = models.BooleanField(default=False, verbose_name='Груповий чат')
+    title = models.CharField(max_length=100, blank=True, verbose_name='Назва')
+    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, through='ChatParticipant', related_name='chats', verbose_name='Учасники')
 
 class Message(models.Model):
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    text = models.TextField(max_length=1024)
-    media = models.FileField(upload_to='chat/media', blank=True, null=True)
-    sent_at = models.DateTimeField(auto_now_add=True)
-    read_at = models.DateTimeField(blank=True, null=True)
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages', verbose_name='Чат')
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Відправник', related_name='messages')
+    text = models.TextField(max_length=1024, verbose_name='Текст')
+    media = models.FileField(upload_to='chat/media', blank=True, null=True, verbose_name='Медіа')
+    sent_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата відправлення')
+    read_at = models.DateTimeField(blank=True, null=True, verbose_name='Дата прочитання')
+    is_read = models.BooleanField(default=False, verbose_name='Прочитано')
 
     class Meta:
         ordering = ['sent_at']
 
     def __str__(self):
-        return f'Message from {self.sender.username} in chat {self.chat.id}'
+        return f'Повідомлення від {self.sender.username} в чаті {self.chat.id}'
 
