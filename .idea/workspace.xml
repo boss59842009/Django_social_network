@@ -6,19 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/decorators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth_system/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth_system/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/mixins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/posts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/followed_profiles_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/followed_profiles_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/profile_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/profile_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_system/profiles_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_system/profiles_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header_custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header_custom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/posts/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/post_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/posts/posts_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts/posts_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,25 +35,29 @@
     &quot;accountId&quot;: &quot;963b99ed-bdb5-4c75-8e68-554ab338e98e&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2hvklu2s7xtYSzXzL22TPPCYDb6" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.Runserver.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/auth_system&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.Runserver.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/auth_system",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/auth_system" />
@@ -91,6 +82,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -101,6 +93,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
       <option name="PARAMETERS" value="runserver 127.0.0.1:4000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
