@@ -7,6 +7,11 @@ class PostForm(forms.ModelForm):
         model = models.Post
         fields = ['text', 'image']
 
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control form-label', 'cols': 80, 'rows': 5}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'})
+        }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

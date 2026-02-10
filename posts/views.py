@@ -1,9 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
@@ -42,7 +42,7 @@ def all_posts_view(request):
 
 
 @login_required
-def delete_post_view(request, pk):
+def post_delete_view(request, pk):
     post = models.Post.objects.get(id=pk)
     if request.user.username != post.author.username:
         return redirect('post-detail', pk=pk)
@@ -103,7 +103,7 @@ def like_unlike_view(request, pk):
         return redirect('all-posts')
 
 
-class PostUpdateView(UserIsAuthorMixin, UpdateView):
+class PostUpdateView(UserIsAuthorMixin, LoginRequiredMixin, UpdateView):
     model = models.Post
     form_class = forms.PostForm
     template_name = 'posts/post_edit_form.html'
@@ -112,8 +112,7 @@ class PostUpdateView(UserIsAuthorMixin, UpdateView):
         return reverse_lazy('post-detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        post = form.save(commit=False)
-        post.updated_at = timezone.now()
-        post.save()
-        return super().form_valid(form)
-        # return HttpResponse("Valid")
+        self.object = form.save(commit=False)
+        self.object.updated_at = timezone.now()
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())

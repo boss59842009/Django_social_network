@@ -84,7 +84,7 @@ def edit_profile_view(request, slug):
     else:
         user_form = forms.UserEditForm(instance=request.user)
         profile_form = forms.ProfileEditForm(instance=request.user.profile)
-        return render(request, 'auth_system/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+        return render(request, 'auth_system/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
