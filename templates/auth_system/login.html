@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,7 @@
             <div class="form-floating">
               <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name}}"
                      placeholder="name@example.com" required>
-              <label for="{{ form.username.id_for_label }}">Username</label>
+              <label for="{{ form.username.id_for_label }}">Username or email</label>
             </div>
             <div class="form-floating">
               <input type="password" class="form-control" id="{{ form.password.id_for_label }}"
@@ -43,6 +44,7 @@
                 <a class="text-decoration-none text-dark" href="{% url 'registration' %}">Реєстрація</a>
             </div>
             <button class="btn btn-dark w-100 py-2" type="submit">Увійти</button>
+            <a href="{% provider_login_url 'google' %}">Signup wit Google</a>
         </form>
     </div>
     <script src="https://kit.fontawesome.com/cfaacc44df.js" crossorigin="anonymous"></script>
