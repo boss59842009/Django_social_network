@@ -15,23 +15,18 @@ from auth_system import models
 from auth_system.decorators import user_is_owner_required
 
 
-@login_required
-def index(request):
-    # if request.method == 'GET':
-    return render(request, 'auth_system/index.html')
-
-
 def user_login_view(request):
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            print(cd)
             user = authenticate(username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('index')
+                    if not cd['remember_me']:
+                        request.session.set_expiry(0)
+                    return redirect('all-posts')
                 else:
                     return HttpResponse("Користувача відключено!")
             else:
@@ -58,7 +53,6 @@ def on_user_login(sender, request, user, **kwargs):
 class CustomLogoutView(LogoutView):
     next_page = 'login'
 
-
 class UserRegistrationView(CreateView):
     template_name = 'auth_system/registration.html'
     form_class = forms.UserRegistrationForm
@@ -82,15 +76,15 @@ class UserRegistrationView(CreateView):
 def edit_profile_view(request, slug):
     if request.method == 'POST':
         user_form = forms.UserEditForm(instance=request.user, data=request.POST)
-        profile_form = forms.ProfileEditForm(instance=request.user.userprofile, data=request.POST, files=request.FILES)
+        profile_form = forms.ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
         if user_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('user-info', slug=slug)
     else:
         user_form = forms.UserEditForm(instance=request.user)
-        profile_form = forms.ProfileEditForm(instance=request.user.userprofile)
-        return render(request, 'auth_system/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+        profile_form = forms.ProfileEditForm(instance=request.user.profile)
+        return render(request, 'auth_system/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
@@ -114,7 +108,7 @@ def profiles_list_view(request):
 def followed_profiles_list_view(request):
     if request.method == 'GET':
         # profiles = models.UserProfile.objects.filter(followers__follower=request.user.pk)
-        subscriptions = models.Subscription.objects.filter(follower=request.user).select_related('following')
+        subscriptions = models.Subscription.objects.filter(follower=request.user)
         users = [subscription.following for subscription in subscriptions]
         return render(request, 'auth_system/followed_profiles_list.html', {'users': users})
 

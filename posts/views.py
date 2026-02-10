@@ -1,25 +1,25 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from posts import models, forms
-from auth_system.models import User
+from auth_system.models import User, Subscription
 from posts.mixins import UserIsAuthorMixin
-
 
 @login_required
 def all_posts_view(request):
     if request.method == 'GET':
-        # following_profiles = models.Subscription.objects.filter(follower=request.user.userprofile).values_list(
-        #     'follower', flat=True)
-        posts = models.Post.objects.all().annotate(total_likes=Count('likes'), is_liked=Count('likes',
-                                                                                              filter=Q(likes__id=request.user.pk)))
-
+        following_users = Subscription.objects.filter(follower=request.user).values_list('following', flat=True)
+        posts = (
+            models.Post.objects.filter(Q(author__in=following_users) | Q(author=request.user)).annotate(total_likes=Count('likes'),
+                is_liked=Count('likes', filter=Q(likes__id=request.user.pk))
+            )
+        )
         posts = posts.order_by('-updated_at')
         create_post_form = forms.PostForm()
         context = {
@@ -42,7 +42,7 @@ def all_posts_view(request):
 
 
 @login_required
-def delete_post_view(request, pk):
+def post_delete_view(request, pk):
     post = models.Post.objects.get(id=pk)
     if request.user.username != post.author.username:
         return redirect('post-detail', pk=pk)
@@ -93,18 +93,17 @@ def post_detail_view(request, pk):
 def like_unlike_view(request, pk):
     if request.method == 'GET':
         post = models.Post.objects.get(id=pk)
-        user = User.objects.get(username=request.user)
-        if post.user_is_liked(request.user):
+        user = User.objects.get(username=request.user.username)
+        if post.user_is_liked(user):
             post.likes.remove(user)
-            return redirect('post-detail', pk=pk)
         else:
             post.likes.add(user)
-            return redirect('post-detail', pk=pk)
+        return redirect('post-detail', pk=pk)
     else:
         return redirect('all-posts')
 
 
-class PostUpdateView(UserIsAuthorMixin, UpdateView):
+class PostUpdateView(UserIsAuthorMixin, LoginRequiredMixin, UpdateView):
     model = models.Post
     form_class = forms.PostForm
     template_name = 'posts/post_edit_form.html'
@@ -113,8 +112,7 @@ class PostUpdateView(UserIsAuthorMixin, UpdateView):
         return reverse_lazy('post-detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        post = form.save(commit=False)
-        post.updated_at = timezone.now()
-        post.save()
-        return super().form_valid(form)
-        # return HttpResponse("Valid")
+        self.object = form.save(commit=False)
+        self.object.updated_at = timezone.now()
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())

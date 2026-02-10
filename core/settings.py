@@ -30,9 +30,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 60 * 24 * 14
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'chats',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'auth_system',
-    'posts'
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -78,17 +82,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+ASGI_APPLICATION = 'core.asgi.application'
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -124,13 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Kiev'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -148,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'auth_system.User'
 
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/posts/all/'
 # LOGOUT_REDIRECT_URL = 'logout'
 
 MEDIA_URL = '/media/'
@@ -156,9 +157,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SITE_ID = 1
 
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_METHODS = {"email", "username"}
+
+ACCOUNT_SIGNUP_FIELDS = [
+    "email*",
+    "username*",
+    "password1*",
+    "password2*",
+]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -181,3 +187,4 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     }
 }
+

@@ -1,79 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Всі пости{% endblock %}
-
-{% block content %}
-<div class="col-6 p-2">
-    <div class="card mb-2 p-2">
-      <input type="text" id="create_post" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Введіть текст для створення посту">
-    </div>
-    <div class="modal" id="new_post" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Створити пост</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <h5>{% if request.user.userprofile.avatar %}
-                <img src="{{ request.user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
-                        class="rounded-circle">
-              {% else %}
-                <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
-                        class="rounded-circle">
-              {% endif %}
-              {{ request.user.first_name }} {{ request.user.last_name }}</h5>
-              <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-floating">
-                  <textarea class="form-control" placeholder="Текст публікації" name="{{ create_post_form.text.html_name }}" id="{{ create_post_form.text.id_for_label }}" style="height: 100px"></textarea>
-                  <label for="{{ create_post_form.text.id_for_label }}">Текст публікації</label>
-                </div>
-                <div class="my-3">
-                  <input class="form-control" type="file" name="{{ create_post_form.image.html_name }}"
-                         id="{{ create_post_form.image.id_for_label }}">
-                </div>
-                <button type="submit" class="btn btn-success">Опублікувати</button>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% for post in posts %}
-    <div class="card mb-2 p-2">
-        <div class="card-body p-0">
-            <h5 class="card-title mb-1">
-            {% if post.author.userprofile.avatar %}
-            <img src="{{ post.author.userprofile.avatar.url }}" alt="Фото профілю" width="32" height="32"
-                 class="rounded-circle">
-            {% else %}
-            <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32" height="32"
-                 class="rounded-circle">
-            {% endif %}
-            {{ post.author.first_name }} {{ post.author.last_name }}</h5>
-            <p class="card-text mb-1"><small class="text-muted">{{ post.updated_at|date:"d.m.Y" }}</small></p>
-            <h6 class="card-text mb-2">{{ post.text }}</h6>
-        </div>
-        {% if post.image %}
-        <a href="{% url 'post-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-bottom img-fluid"
-             style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
-        {% else %}
-        <a href="{% url 'post-detail' post.pk %}"><img src="{% static 'img/posts/post_default.jpg' %}" class="card-img-bottom img-fluid"
-             style="object-fit: cover; height: 200px;" alt="Зображення публікації"></a>
-        {% endif %}
-        <div class="d-flex justify-content-start py-1">
-            {% if post.is_liked %}
-                <p class="m-0 pe-2">
-                    <a href="{% url 'like-post' post.pk %}"><i class="fa-solid fa-heart"></i></a> {{ post.total_likes }}</p>
-            {% else %}
-                <p class="m-0 pe-2"><a href="{% url 'like-post' post.pk %}"><i class="fa-regular fa-heart"></i></a> {{ post.total_likes }}</p>
-            {% endif %}
-            <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>
-        </div>
-    </div>
-    {% endfor %}
-    <script src="{% static 'js/create_post_modal.js' %}"></script>
-</div>
+{% block title %}
+    Всі пости
 {% endblock %}
 
-
+{% block content %}
+    <div class="col-6 p-2">
+        <div class="card mb-2 p-2">
+            <input type="text" id="create_post" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-lg" placeholder="Введіть текст для створення посту"/>
+        </div>
+        <div class="modal" id="new_post" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Створити пост</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            {% if request.user.profile.avatar %}
+                                <img src="{{ request.user.profile.avatar.url }}" alt="Фото профілю" width="40"
+                                     height="40" class="rounded-circle"/>
+                            {% else %}
+                                <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40"
+                                     height="40" class="rounded-circle"/>
+                            {% endif %}
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                        </h5>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Текст публікації"
+                                          name="{{ create_post_form.text.html_name }}"
+                                          id="{{ create_post_form.text.id_for_label }}"
+                                          style="height: 100px"></textarea>
+                                <label for="{{ create_post_form.text.id_for_label }}">Текст публікації</label>
+                            </div>
+                            <div class="my-3">
+                                <input class="form-control" type="file" name="{{ create_post_form.image.html_name }}"
+                                       id="{{ create_post_form.image.id_for_label }}"/>
+                            </div>
+                            <button type="submit" class="btn btn-success">Опублікувати</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for post in posts %}
+            <div class="card mb-2 p-2">
+                <div class="card-body p-0">
+                    <a href="{% url 'user-info' post.author.slug %}" class="card-title mb-1 text-decoration-none fs-5">
+                        {% if post.author.profile.avatar %}
+                            <img src="{{ post.author.profile.avatar.url }}" alt="Фото профілю" width="32" height="32"
+                                 class="rounded-circle"/>
+                        {% else %}
+                            <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="32"
+                                 height="32" class="rounded-circle"/>
+                        {% endif %}
+                        {{ post.author.first_name }} {{ post.author.last_name }}
+                    </a>
+                    <p class="card-text mb-1">
+                        <small class="text-muted">{{ post.updated_at|date:'d.m.Y' }}</small>
+                    </p>
+                    <a href="{% url 'post-detail' post.pk %}" class="text-decoration-none"><h6 class="card-text mb-2"
+                    >{{ post.text }}</h6></a>
+                </div>
+                {% if post.image %}
+                    <div class="ratio ratio-16x9 mb-2">
+                        <img src="{{ post.image.url }}" class="img-fluid rounded" alt="Зображення публікації"
+                             style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                {% endif %}
+                <div class="d-flex justify-content-start py-1">
+                    {% if post.is_liked %}
+                        <p class="m-0 pe-2">
+                            <a href="{% url 'like-post' post.pk %}"><i
+                                    class="fa-solid fa-heart fa-lg"></i></a> {{ post.total_likes }}
+                        </p>
+                    {% else %}
+                        <p class="m-0 pe-2">
+                            <a href="{% url 'like-post' post.pk %}"><i
+                                    class="fa-regular fa-heart fa-lg"></i></a> {{ post.total_likes }}
+                        </p>
+                    {% endif %}
+                    <p class="badge bg-dark m-0">Перегляди: {{ post.views }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <script src="{% static 'js/create_post_modal.js' %}"></script>
+    </div>
+{% endblock %}

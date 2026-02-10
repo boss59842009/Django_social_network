@@ -7,6 +7,7 @@ from auth_system import models
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    remember_me = forms.BooleanField(required=False)
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -35,11 +36,25 @@ class UserEditForm(forms.ModelForm):
         model = models.User
         fields = (
             'username',
+            'email',
             'first_name',
             'last_name',
-            'email',
             'phone_number'
         )
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'phone_number': 'Номер телефону',
+            'first_name': 'Ім\'я',
+            'last_name': 'Прізвище',          
+        }
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -52,5 +67,15 @@ class ProfileEditForm(forms.ModelForm):
             'gender',
         )
         widgets = {
-            'birthday': forms.DateInput(attrs={'type': 'date'})
+            'bio': forms.TextInput(attrs={'class': 'form-control'}),
+            'avatar': forms.FileInput(attrs={'class': 'form-control'}),
+            'birthday': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'gender': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'bio': 'Біографія',
+            'avatar': 'Аватар',
+            'birthday': 'Дата народження',
+            'gender': 'Стать',   
         }

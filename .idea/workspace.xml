@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2c082277-0a9c-4ced-845f-315c95ea2456" name="Changes" comment="fix UserRegistrationForm, create new registration.html, fix UserRegistrationView" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +50,6 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Python.Runserver.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/zekasemenuk/Desktop/PycharmProjects/Django_social_network/templates/auth_system",
     "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "preferences.pluginManager"

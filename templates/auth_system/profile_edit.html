@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Зміна даних аккаунту{% endblock %}
+{% block content %}
+<div class="col-6 p-4 bg-light border border-dark rounded mt-2 py-0">
+    <h1>Змініть дані свого аккаунту</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row">
+            <!-- Left: Avatar -->
+            <div class="col-md-3 text-center p-3 border rounded bg-light">
+                {% if request.user.profile.avatar %}
+                    <img
+                        src="{{ request.user.profile.avatar.url }}"
+                        alt="Avatar"
+                        class="rounded-circle mb-3"
+                        width="180"
+                        height="180"
+                        style="object-fit: cover;"
+                    >
+                {% else %}
+                    <div class="mb-3 text-muted">Аватар не встановлено</div>
+                {% endif %}
+
+                <div class="mt-2">
+                    {{ profile_form.avatar }}
+                </div>
+            </div>
+
+            <!-- Right: Main editable fields -->
+            <div class="col-md-8">
+                <div class="row gy-2">
+                    {% for field in user_form %}
+                    <div class="col-6">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Other profile fields below -->
+        <div class="row mt-4">
+            {% for field in profile_form %}
+                {% if field.name != 'avatar' %}
+                <div class="col-4 mb-2">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="my-3">
+            <input type="submit" class="btn btn-success" value="Змінити">
+        </div>
+    </form>
+</div>
+{% endblock %}

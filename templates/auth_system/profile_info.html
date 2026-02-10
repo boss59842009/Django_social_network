@@ -3,23 +3,25 @@
 {% block title %}Профіль користувача{% endblock %}
 {% block content %}
 <div class="col-6 p-2 my-2 bg-light">
-    <h5>{% if user.userprofile.avatar %}
-            <img src="{{ user.userprofile.avatar.url }}" alt="Фото профілю" width="40" height="40"
+    <h5>{% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="Фото профілю" width="60" height="60"
                 class="rounded-circle">
         {% else %}
             <img src="{% static 'img/posts/post_default.jpg' %}" alt="Фото профілю" width="40" height="40"
                 class="rounded-circle">
         {% endif %}
         {{ user.first_name }} {{ user.last_name }}</h5>
-    {% if is_follow %}
-        <p><a href="{% url 'follow-user' user.slug %}"><button type="button">Unfollow</button></a></p>
-    {% else %}
-        <p><a href="{% url 'follow-user' user.slug %}"><button type="button">Follow</button></a></p>
+    {% if request.user != user %}
+        {% if is_follow %}
+            <p><a type="button" class="btn btn-danger" href="{% url 'follow-user' user.slug %}"><i class="fa-solid fa-user-minus fa-beat fa-lg" style="color: #ffffff;"></i> Unfollow</a></p>
+        {% else %}
+            <p><a type="button" class="btn btn-success" href="{% url 'follow-user' user.slug %}"><i class="fa-solid fa-user-plus fa-beat fa-lg"></i> Follow</a></p>
+        {% endif %}
     {% endif %}
-    <p><b>Стать:</b> {{ user.userprofile.get_gender_display }}</p>
-    <p><b>Дата народження:</b> {{ user.userprofile.birthday|date:"d.m.Y" }}</p>
+    <p><b>Стать:</b> {{ user.profile.get_gender_display }}</p>
+    <p><b>Дата народження:</b> {{ user.profile.birthday|date:"d.m.Y" }}</p>
     <p><b>Номер телефону:</b> {{ user.phone_number }}</p>
     <p><b>Адреса електронної пошти:</b> {{ user.email }}</p>
-    <p><b>Біографія:</b> {{ user.userprofile.bio }}</p>
+    <p><b>Біографія:</b> {{ user.profile.bio }}</p>
 </div>
 {% endblock %}
